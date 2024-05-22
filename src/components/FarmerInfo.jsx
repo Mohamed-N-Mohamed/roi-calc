@@ -111,11 +111,11 @@ const FarmerInfo = () => {
             sx={{ backgroundColor: '#fff', width: '40%' }}
           />
           {/* <FormControlLabel control={<Checkbox />} label='Yes, I agree to the requirement that you just layout it' sx={{width: '30%'}}/> */}
-          <Box>
+          {/* <Box>
             <Typography component='h6' variant='h6'>
               Farmer Information
             </Typography>
-          </Box>
+          </Box> */}
         </Box>
       </Box>
     </Box>
