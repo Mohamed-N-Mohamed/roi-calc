@@ -46,6 +46,7 @@ const FarmerInfo = () => {
 
       <Box
         component='form'
+        className='farmer-information'
         sx={{
           padding: '2rem',
           fontSize: '28px',
@@ -95,7 +96,7 @@ const FarmerInfo = () => {
             required
             label='Farm Type'
             select
-            sx={{ width: '30%', backgroundColor: '#fff' }}
+            sx={{ width: '50%', backgroundColor: '#fff' }}
           >
             {farmTypes.map((farms) => (
               <MenuItem key={farms.values} value={farms.values}>
@@ -108,7 +109,7 @@ const FarmerInfo = () => {
             required
             label='Phone'
             fullWidth
-            sx={{ backgroundColor: '#fff', width: '40%' }}
+            sx={{ backgroundColor: '#fff', width: '50%' }}
           />
           {/* <FormControlLabel control={<Checkbox />} label='Yes, I agree to the requirement that you just layout it' sx={{width: '30%'}}/> */}
           {/* <Box>
@@ -116,6 +117,34 @@ const FarmerInfo = () => {
               Farmer Information
             </Typography>
           </Box> */}
+        </Box>
+
+        <Box
+          component='div'
+          className='gdbr'
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            margin: '0 auto',
+            paddingTop: '2rem',
+          }}
+        >
+          <Typography variant='body2' sx={{ width: '400px' }}>
+            I consent to the collection and processing of my personal data,
+            including my name, address, contact number, and email
+          </Typography>
+          <Checkbox />
+        </Box>
+
+        <Box
+          component='div'
+          className='form-submit'
+          sx={{ textAlign: 'center', paddingTop: '2rem' }}
+        >
+          <Button variant='contained' sx={{ padding: '0.55rem 1.8rem' }}>
+            Submit
+          </Button>
         </Box>
       </Box>
     </Box>
