@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Checkbox from '@mui/material/Checkbox';
 
-const FormInputs = () => {
+const FormInput2 = () => {
   const farmTypes = [
     {
       values: 'High',
@@ -89,86 +89,46 @@ const FormInputs = () => {
           <TextField
             margin='normal'
             required
-            label='Herd Size'
-            sx={{ backgroundColor: '#fff' }}
+            label='Yearly electric consumption'
+            sx={{ backgroundColor: '#fff', width: '50%' }}
           />
 
           <TextField
             margin='normal'
             required
-            label='Yield of cows'
-            select
-            sx={{ width: '30%', backgroundColor: '#fff' }}
-          >
-            {farmTypes.map((farms) => (
-              <MenuItem key={farms.values} value={farms.values}>
-                {farms.label}
-              </MenuItem>
-            ))}
-          </TextField>
-          <TextField
-            margin='normal'
-            required
-            label='Lagoon Volume'
-            sx={{ backgroundColor: '#fff' }}
+            label='Yearly diesel consumption'
+            sx={{ backgroundColor: '#fff', width: '50%' }}
           />
         </Box>
 
         <Box
-          component='div'
           sx={{
             display: 'flex',
-            alignItems: 'center',
             justifyContent: 'center',
-            paddingTop: '2rem',
+            marginBottom: '2rem',
           }}
         >
-          <Box component='div' sx={{ width: '50%' }}>
-            <TextField
-              margin='normal'
-              required
-              label='Lagoon Type'
-              select
-              sx={{ width: '60%', backgroundColor: '#fff' }}
-            >
-              {lagoonTypes.map((farms) => (
-                <MenuItem key={farms.values} value={farms.values}>
-                  {farms.label}
-                </MenuItem>
-              ))}
-            </TextField>
-          </Box>
-
-          <Box sx={{ width: '30%' }}>
-            <Box component='div'>
-              <TextField
-                margin='normal'
-                required
-                label='Lagoon Height'
-                sx={{ backgroundColor: '#fff' }}
-              />
-            </Box>
-            <Box component='div'>
-              <TextField
-                margin='normal'
-                required
-                label='Lagoon Width'
-                sx={{ backgroundColor: '#fff' }}
-              />
-            </Box>
-            <Box component='div'>
-              <TextField
-                margin='normal'
-                required
-                label='Lagoon Depth'
-                sx={{ backgroundColor: '#fff' }}
-              />
-            </Box>
-          </Box>
+          <TextField
+            margin='normal'
+            required
+            label='No. of tonnes of nitrogen based fertiliser'
+            sx={{ backgroundColor: '#fff', width: '50%' }}
+          />
         </Box>
+
+        <Button
+          variant='contained'
+          sx={{
+            padding: '0.55rem 1.8rem',
+            display: 'block',
+            margin: '0 auto',
+          }}
+        >
+          calculate
+        </Button>
       </Box>
     </Box>
   );
 };
 
-export default FormInputs;
+export default FormInput2;
