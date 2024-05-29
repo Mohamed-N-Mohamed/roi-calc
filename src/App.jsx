@@ -5,6 +5,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import FormInputs from './components/FormInputs';
 import FormInput2 from './components/FormInput2';
+import Results from './components/Results';
 
 function App() {
   return (
@@ -13,7 +14,8 @@ function App() {
         <CssBaseline />
         {/* <FarmerInfo /> */}
         {/* <FormInputs /> */}
-        <FormInput2 />
+        {/* <FormInput2 /> */}
+        <Results />
       </Container>
     </div>
   );
