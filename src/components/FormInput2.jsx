@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Checkbox from '@mui/material/Checkbox';
 
-const FormInput2 = () => {
+const FormInput2 = (props) => {
   const farmTypes = [
     {
       values: 'High',
@@ -116,16 +116,33 @@ const FormInput2 = () => {
           />
         </Box>
 
-        <Button
-          variant='contained'
+        <Box
+          component='div'
+          className='form-submit'
           sx={{
-            padding: '0.55rem 1.8rem',
-            display: 'block',
-            margin: '0 auto',
+            paddingTop: '2rem',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            gap: '1.5rem',
           }}
         >
-          calculate
-        </Button>
+          <Button
+            variant='contained'
+            sx={{ padding: '0.55rem 1.8rem' }}
+            onClick={props.previousStep}
+          >
+            Previous
+          </Button>
+
+          <Button
+            variant='contained'
+            sx={{ padding: '0.55rem 1.8rem' }}
+            onClick={props.nextStep}
+          >
+            Continue
+          </Button>
+        </Box>
       </Box>
     </Box>
   );

@@ -6,7 +6,6 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Checkbox from '@mui/material/Checkbox';
 
-
 const farmTypes = [
   {
     values: 'dairy farms',
@@ -24,7 +23,8 @@ const farmTypes = [
   },
 ];
 
-const FarmerInfo = () => {
+const FarmerInfo = (props) => {
+  console.log(props);
   return (
     <Box
       sx={{
@@ -142,8 +142,12 @@ const FarmerInfo = () => {
           className='form-submit'
           sx={{ textAlign: 'center', paddingTop: '2rem' }}
         >
-          <Button variant='contained' sx={{ padding: '0.55rem 1.8rem' }}>
-            Submit
+          <Button
+            variant='contained'
+            sx={{ padding: '0.55rem 1.8rem' }}
+            onClick={props.nextStep}
+          >
+            Continue
           </Button>
         </Box>
       </Box>
