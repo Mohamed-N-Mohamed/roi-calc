@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import './App.css';
 import FarmerInfo from './components/FarmerInfo';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -9,6 +8,7 @@ import Results from './components/Results';
 import StepWizard from 'react-step-wizard';
 
 function App() {
+  console.log(import.meta.env.VITE_API_Key);
   return (
     <div className='main'>
       <Container maxWidth='md'>

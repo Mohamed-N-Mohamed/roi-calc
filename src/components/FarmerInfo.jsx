@@ -5,6 +5,8 @@ import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Checkbox from '@mui/material/Checkbox';
+import AutoComplete from './AutoComplete';
+
 
 const farmTypes = [
   {
@@ -67,12 +69,13 @@ const FarmerInfo = (props) => {
             label='Full Name'
             sx={{ backgroundColor: '#fff', width: '50%' }}
           />
-          <TextField
+          {/* <TextField
             margin='normal'
             required
             label='Address '
             sx={{ backgroundColor: '#fff', width: '50%' }}
-          />
+          /> */}
+          <AutoComplete />
         </Box>
         <TextField
           margin='normal'
