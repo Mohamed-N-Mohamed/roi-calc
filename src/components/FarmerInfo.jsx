@@ -7,7 +7,6 @@ import Typography from '@mui/material/Typography';
 import Checkbox from '@mui/material/Checkbox';
 import AutoComplete from './AutoComplete';
 
-
 const farmTypes = [
   {
     values: 'dairy farms',
@@ -25,8 +24,19 @@ const farmTypes = [
   },
 ];
 
-const FarmerInfo = (props) => {
-  console.log(props);
+const FarmerInfo = ({ nextStep, setFarmerDetails, farmerDetails }) => {
+  const handleChange = (e) => {
+    console.log(e.target.name);
+
+    console.log(e.target.value);
+    setFarmerDetails((prev) => {
+      return {
+        ...prev,
+        [e.target.name]: e.target.value,
+      };
+    });
+  };
+
   return (
     <Box
       sx={{
@@ -67,7 +77,10 @@ const FarmerInfo = (props) => {
             margin='normal'
             required
             label='Full Name'
+            name='fullName'
             sx={{ backgroundColor: '#fff', width: '50%' }}
+            onChange={handleChange}
+            value={farmerDetails.fullName}
           />
           {/* <TextField
             margin='normal'
@@ -75,13 +88,16 @@ const FarmerInfo = (props) => {
             label='Address '
             sx={{ backgroundColor: '#fff', width: '50%' }}
           /> */}
-          <AutoComplete />
+          <AutoComplete handleChange={handleChange} />
         </Box>
         <TextField
           margin='normal'
           required
           label='Email'
           fullWidth
+          name='email'
+          onChange={handleChange}
+          value={farmerDetails.email}
           sx={{ backgroundColor: '#fff' }}
         />
 
@@ -99,6 +115,9 @@ const FarmerInfo = (props) => {
             required
             label='Farm Type'
             select
+            name='farmType'
+            onChange={handleChange}
+            value={farmerDetails.farmType}
             sx={{ width: '50%', backgroundColor: '#fff' }}
           >
             {farmTypes.map((farms) => (
@@ -111,6 +130,9 @@ const FarmerInfo = (props) => {
             margin='normal'
             required
             label='Phone'
+            name='phone'
+            onChange={handleChange}
+            value={farmerDetails.phone}
             fullWidth
             sx={{ backgroundColor: '#fff', width: '50%' }}
           />
@@ -148,7 +170,7 @@ const FarmerInfo = (props) => {
           <Button
             variant='contained'
             sx={{ padding: '0.55rem 1.8rem' }}
-            onClick={props.nextStep}
+            onClick={nextStep}
           >
             Continue
           </Button>

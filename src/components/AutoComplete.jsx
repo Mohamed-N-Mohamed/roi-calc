@@ -26,6 +26,7 @@ const AutoComplete = () => {
       inputRef={materialRef}
       margin='normal'
       required
+      name='address'
       sx={{ backgroundColor: '#fff', width: '50%' }}
     />
   );

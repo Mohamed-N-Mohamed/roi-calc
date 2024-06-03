@@ -6,7 +6,23 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Checkbox from '@mui/material/Checkbox';
 
-const FormInputs = (props) => {
+const FormInputs = ({
+  previousStep,
+  nextStep,
+  requiredValues,
+  setRequiredValues,
+}) => {
+  const handleChange = (e) => {
+    console.log(e.target.name);
+
+    console.log(e.target.value);
+    setRequiredValues((prev) => {
+      return {
+        ...prev,
+        [e.target.name]: e.target.value,
+      };
+    });
+  };
   const farmTypes = [
     {
       values: 'High',
@@ -50,6 +66,7 @@ const FormInputs = (props) => {
       label: 'Circular Steel',
     },
   ];
+
   return (
     <Box
       sx={{
@@ -90,6 +107,9 @@ const FormInputs = (props) => {
             margin='normal'
             required
             label='Herd Size'
+            name='herdSize'
+            onChange={handleChange}
+            value={requiredValues.herdSize}
             sx={{ backgroundColor: '#fff' }}
           />
 
@@ -98,6 +118,9 @@ const FormInputs = (props) => {
             required
             label='Yield of cows'
             select
+            onChange={handleChange}
+            name='yieldOfCows'
+            value={requiredValues.yieldOfCows}
             sx={{ width: '30%', backgroundColor: '#fff' }}
           >
             {farmTypes.map((farms) => (
@@ -110,6 +133,9 @@ const FormInputs = (props) => {
             margin='normal'
             required
             label='Lagoon Volume'
+            name='lagoonVolume'
+            onChange={handleChange}
+            value={requiredValues.lagoonVolume}
             sx={{ backgroundColor: '#fff' }}
           />
         </Box>
@@ -129,6 +155,9 @@ const FormInputs = (props) => {
               required
               label='Lagoon Type'
               select
+              onChange={handleChange}
+              name='lagoonType'
+              value={requiredValues.lagoonType}
               sx={{ width: '60%', backgroundColor: '#fff' }}
             >
               {lagoonTypes.map((farms) => (
@@ -145,6 +174,9 @@ const FormInputs = (props) => {
                 margin='normal'
                 required
                 label='Lagoon Height'
+                onChange={handleChange}
+                name='lagoonHeight'
+                value={requiredValues.lagoonHeight}
                 sx={{ backgroundColor: '#fff' }}
               />
             </Box>
@@ -153,6 +185,9 @@ const FormInputs = (props) => {
                 margin='normal'
                 required
                 label='Lagoon Width'
+                onChange={handleChange}
+                name='lagoonWidth'
+                value={requiredValues.lagoonWidth}
                 sx={{ backgroundColor: '#fff' }}
               />
             </Box>
@@ -181,7 +216,7 @@ const FormInputs = (props) => {
           <Button
             variant='contained'
             sx={{ padding: '0.55rem 1.8rem' }}
-            onClick={props.previousStep}
+            onClick={previousStep}
           >
             Previous
           </Button>
@@ -189,7 +224,7 @@ const FormInputs = (props) => {
           <Button
             variant='contained'
             sx={{ padding: '0.55rem 1.8rem' }}
-            onClick={props.nextStep}
+            onClick={nextStep}
           >
             Continue
           </Button>
