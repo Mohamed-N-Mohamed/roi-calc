@@ -173,10 +173,10 @@ const FormInputs = ({
               <TextField
                 margin='normal'
                 required
-                label='Lagoon Height'
+                label='Lagoon Length'
                 onChange={handleChange}
-                name='lagoonHeight'
-                value={requiredValues.lagoonHeight}
+                name='lagoonLength'
+                value={requiredValues.Length}
                 sx={{ backgroundColor: '#fff' }}
               />
             </Box>
