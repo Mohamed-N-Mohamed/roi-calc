@@ -9,6 +9,10 @@ import StepWizard from 'react-step-wizard';
 import { useState } from 'react';
 
 function App() {
+
+  const [capitalCost, setCapitalCost] = useState('')
+
+ 
   const [farmerDetails, setFarmerDetails] = useState({
     fullName: '',
     address: '',
@@ -227,8 +231,7 @@ function App() {
     assumedSavingsFromFertiliser + dieselSavings + electricSavings;
   const totalSavings = +totalSavings1.toFixed(5);
 
-  //TODO work on capital costs
-
+ 
   //Capital Cost
   const numberOfGFSNeeded = Math.ceil(75308.2575 / gasProcessingSpeedGFS);
 
@@ -261,12 +264,40 @@ function App() {
   const numberOfGeneratorsNeeded = roundUp(requiredValues.yearlyElectricConsumption / generatorOutputYearly)
   const priceForGenerator = numberOfGeneratorsNeeded * generatorPriceIncludingWarranty
   const estimatedCapitalCostBeforeMarkUp = terrastoreCost + priceForGenerator + BundleCost + gasCapPriceIncludingSkirt + cfmCost + gfsCost
-  const capitalCostWithMarkUp  = estimatedCapitalCostBeforeMarkUp * (1 + markUpPercentage)
 
-  console.log(capitalCostWithMarkUp);
-
+ 
+ 
   //Income
-  const electricExport = 0;
+  const fromElectricExport = methaneRemainingAfterDiesel * kwhPerKgMethane * electricGridPrice
+  const fromRRTFCs = estimatedYearlyMethaneOutput * rtfcPrice * rtfcSplitPercentage
+  const totalIncome = fromRRTFCs + fromElectricExport
+
+  
+
+
+  //Yearly Operations Costs
+  const fromCFM = typeof cfmTypeNumberNeeded === 'number'? cfmTypeNumberNeeded * yearlyCFMMaintenanceCost : yearlyMobileCFMMaintenanceCost
+  const fromGFS =  numberOfGFSNeeded * yearlyGFSMaintenanceCost
+  const fromGasCaps = numberOfGasCapsNeeded * yearlyOpsCostPerGasCap
+  const fromGenerator = numberOfGeneratorsNeeded * yearlyOpsPerGenerator
+  const fromTerrastores = terrastoresNeededForAny * yearlyOpsCostPerTerrastore
+  const gasProcessingCosts = annualGasProcessingCosts
+  const totalYearCosts = (fromCFM + fromGFS + fromGasCaps + fromGenerator + fromTerrastores + gasProcessingCosts ) * 0.5
+
+
+
+   //Capital Cost
+   const capitalCostWithMarkUp  = estimatedCapitalCostBeforeMarkUp * (1 + markUpPercentage)
+
+   //Net Revenue
+   const netRevenue1 = (totalIncome + totalSavings) - totalYearCosts
+   const netRevenue = +netRevenue1.toFixed(5)
+
+  //ROI Time 
+  const roiTime = capitalCostWithMarkUp / netRevenue
+
+  console.log(roiTime)
+
 
   //Net revenue = Add savings and income and subtract yearly operations cost
 
