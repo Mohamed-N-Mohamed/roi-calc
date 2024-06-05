@@ -28,6 +28,8 @@ function App() {
     timeHoused: 4,
     bundAngle: 30,
     yearlyElectricConsumption: 96000,
+    tractorHoursPerYear: 1000,
+    numberOfTonnesNitrogenBasedFertiliser: 500,
   });
 
   //required fixed values
@@ -129,11 +131,6 @@ function App() {
   const lagoonSurfaceArea =
     requiredValues.lagoonLength * requiredValues.lagoonWidth;
 
-  //Capital Cost
-  const numberOfGFSNeeded = Math.ceil(75308.2575 / gasProcessingSpeedGFS);
-  const gfsCost = numberOfGFSNeeded * gasCostIncludingDeploymentGFS;
-  //const cfmTypeNumberNeeded =
-
   //Savings
   const biogasToBeProcessed1 = methaneAdjustedForGasEscape / 0.66 / 0.6;
   const biogasToBeProcessed = +biogasToBeProcessed1.toFixed(4);
@@ -145,7 +142,6 @@ function App() {
     estimatedYearlyMethaneOutput * powerRequiredForBiocycle;
 
   const powerRequiredForBiocyle = +powerRequiredForBiocyle1.toFixed(5);
-  console.log(powerRequiredForBiocyle);
 
   const methaneRequired1 = powerRequiredForBiocyle / kwhPerKgMethane;
   const methaneRequired = +methaneRequired1.toFixed(5);
@@ -181,7 +177,93 @@ function App() {
       ? maxMethanePotential - methaneKGRequiredToMeetGenerator
       : 0;
 
-  console.log(methaneRemainingAfterElectic);
+  const methaneNeededForTractor =
+    requiredValues.tractorHoursPerYear * biomethaneRequiredPerTractorHour;
+
+  const methaneSavedForTractor =
+    methaneRemainingAfterElectic > methaneNeededForTractor
+      ? methaneNeededForTractor
+      : methaneRemainingAfterElectic;
+
+  const equivalnetKGPriceForFuel = cfmDieselMethaneUplife * redDieselPrice;
+
+  const savingPerKG =
+    equivalnetKGPriceForFuel - bennamannPricePerKgMethaneForTractorFuel;
+
+  const dieselSavings = savingPerKG * methaneNeededForTractor;
+
+  const methaneRemainingAfterDiesel =
+    methaneRemainingAfterElectic - methaneNeededForTractor > 0
+      ? methaneRemainingAfterElectic - methaneNeededForTractor
+      : 0;
+
+  const amountOfNitrogenInSlurry =
+    ((requiredValues.herdSize * kgNPerCowPerYear) / 1000) *
+    percentageOfYearHoused;
+
+  const amountOfNitrogenInFertiliser =
+    requiredValues.numberOfTonnesNitrogenBasedFertiliser *
+    assumedFertilizerPercentage;
+
+  const tonnesOfNitrogenSaved =
+    amountOfNitrogenInSlurry > amountOfNitrogenInFertiliser
+      ? amountOfNitrogenInFertiliser
+      : amountOfNitrogenInSlurry;
+
+  const convertToTonnesOfFertiliserSaved =
+    tonnesOfNitrogenSaved / assumedFertilizerPercentage;
+
+  const maximumSavingsFromFertiliser1 =
+    convertToTonnesOfFertiliserSaved * fertilizerCost;
+  const maximumSavingsFromFertiliser =
+    +maximumSavingsFromFertiliser1.toFixed(5);
+  const assumedSavingsFromFertiliser1 =
+    maximumSavingsFromFertiliser * assumedFertilizerUptakePercentage;
+  const assumedSavingsFromFertiliser =
+    +assumedSavingsFromFertiliser1.toFixed(6);
+
+  //Total Savings
+  const totalSavings1 =
+    assumedSavingsFromFertiliser + dieselSavings + electricSavings;
+  const totalSavings = +totalSavings1.toFixed(5);
+
+  //TODO work on capital costs
+
+  //Capital Cost
+  const numberOfGFSNeeded = Math.ceil(75308.2575 / gasProcessingSpeedGFS);
+
+  const gfsCost = numberOfGFSNeeded * gasCostIncludingDeploymentGFS;
+  const cfmTypeNumberNeeded =
+    biogasToBeProcessed > mobileCFMMaxProcessingCapacityYearly
+      ? Math.ceil(biogasToBeProcessed / gasProcessingCapacityCFM)
+      : 'Mobile';
+
+
+      function roundUp(value) {
+        return Math.ceil(value);
+    }
+  const cfmCost = typeof gfsCost === 'number' && !isNaN(gfsCost) ? gfsCost * staticCFMCost : methaneAdjustedForGasEscape
+  const numberOfGasCapsNeeded = roundUp((lagoonSurfaceArea / gasCapSurfaceArea) * skirtPercentageLagoonSurfaceArea)
+  const gasCapPriceIncludingSkirt = numberOfGasCapsNeeded * costPerGasCap
+  const numberOfBundlesNeeded = fixedBundleNumber
+  const BundleCost = bundleCost * fixedBundleNumber
+  const totalAnnualBiogasCaptured = estimatedYearlyMethaneOutput / methaneOutputToBiogasOutputRatio
+  const peakMonthProduction = totalAnnualBiogasCaptured * peakMonthsBiomethaneProductionPercentage
+  const peakWeekProduction = peakMonthProduction / 4
+  const peakHourlyProduction = peakWeekProduction / (24 * 7)
+  const hoursOfMobileBiocyleNeededPerWeek = roundUp(peakWeekProduction / biocycleHourlyProcessingCapacity)
+  const nonBiocyleHours = 24 * 7 - hoursOfMobileBiocyleNeededPerWeek
+  const gasProducedWhenBiocyleNotPresent = peakHourlyProduction * nonBiocyleHours
+  const terrastoresNeededForAny =  roundUp(gasProducedWhenBiocyleNotPresent / terrastoreCapacity)
+  const actualNumberOfTerrastoresNeeded = cfmTypeNumberNeeded === 'Mobile'? terrastoresNeededForAny : 0
+  const terrastoresNeededNoBiocyle = (cfmTypeNumberNeeded === 'Mobile') ? roundUp(peakWeekProduction / terrastoreCapacity) : 0
+  const terrastoreCost = actualNumberOfTerrastoresNeeded * terrastorePriceIncludingWarranty + (actualNumberOfTerrastoresNeeded > 0 ? pressureSensorPriceIncludingWarranty : 0)
+  const numberOfGeneratorsNeeded = roundUp(requiredValues.yearlyElectricConsumption / generatorOutputYearly)
+  const priceForGenerator = numberOfGeneratorsNeeded * generatorPriceIncludingWarranty
+  const estimatedCapitalCostBeforeMarkUp = terrastoreCost + priceForGenerator + BundleCost + gasCapPriceIncludingSkirt + cfmCost + gfsCost
+  const capitalCostWithMarkUp  = estimatedCapitalCostBeforeMarkUp * (1 + markUpPercentage)
+
+  console.log(capitalCostWithMarkUp);
 
   //Income
   const electricExport = 0;
