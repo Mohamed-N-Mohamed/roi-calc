@@ -140,7 +140,7 @@ const FormInput2 = (props) => {
             sx={{ padding: '0.55rem 1.8rem' }}
             onClick={props.nextStep}
           >
-            Continue
+            Calculate
           </Button>
         </Box>
       </Box>

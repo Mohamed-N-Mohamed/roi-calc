@@ -9,10 +9,8 @@ import StepWizard from 'react-step-wizard';
 import { useState } from 'react';
 
 function App() {
+  const [capitalCost, setCapitalCost] = useState('');
 
-  const [capitalCost, setCapitalCost] = useState('')
-
- 
   const [farmerDetails, setFarmerDetails] = useState({
     fullName: '',
     address: '',
@@ -231,7 +229,6 @@ function App() {
     assumedSavingsFromFertiliser + dieselSavings + electricSavings;
   const totalSavings = +totalSavings1.toFixed(5);
 
- 
   //Capital Cost
   const numberOfGFSNeeded = Math.ceil(75308.2575 / gasProcessingSpeedGFS);
 
@@ -241,63 +238,96 @@ function App() {
       ? Math.ceil(biogasToBeProcessed / gasProcessingCapacityCFM)
       : 'Mobile';
 
+  function roundUp(value) {
+    return Math.ceil(value);
+  }
+  const cfmCost =
+    typeof gfsCost === 'number' && !isNaN(gfsCost)
+      ? gfsCost * staticCFMCost
+      : methaneAdjustedForGasEscape;
+  const numberOfGasCapsNeeded = roundUp(
+    (lagoonSurfaceArea / gasCapSurfaceArea) * skirtPercentageLagoonSurfaceArea
+  );
+  const gasCapPriceIncludingSkirt = numberOfGasCapsNeeded * costPerGasCap;
+  const numberOfBundlesNeeded = fixedBundleNumber;
+  const BundleCost = bundleCost * fixedBundleNumber;
+  const totalAnnualBiogasCaptured =
+    estimatedYearlyMethaneOutput / methaneOutputToBiogasOutputRatio;
+  const peakMonthProduction =
+    totalAnnualBiogasCaptured * peakMonthsBiomethaneProductionPercentage;
+  const peakWeekProduction = peakMonthProduction / 4;
+  const peakHourlyProduction = peakWeekProduction / (24 * 7);
+  const hoursOfMobileBiocyleNeededPerWeek = roundUp(
+    peakWeekProduction / biocycleHourlyProcessingCapacity
+  );
+  const nonBiocyleHours = 24 * 7 - hoursOfMobileBiocyleNeededPerWeek;
+  const gasProducedWhenBiocyleNotPresent =
+    peakHourlyProduction * nonBiocyleHours;
+  const terrastoresNeededForAny = roundUp(
+    gasProducedWhenBiocyleNotPresent / terrastoreCapacity
+  );
+  const actualNumberOfTerrastoresNeeded =
+    cfmTypeNumberNeeded === 'Mobile' ? terrastoresNeededForAny : 0;
+  const terrastoresNeededNoBiocyle =
+    cfmTypeNumberNeeded === 'Mobile'
+      ? roundUp(peakWeekProduction / terrastoreCapacity)
+      : 0;
+  const terrastoreCost =
+    actualNumberOfTerrastoresNeeded * terrastorePriceIncludingWarranty +
+    (actualNumberOfTerrastoresNeeded > 0
+      ? pressureSensorPriceIncludingWarranty
+      : 0);
+  const numberOfGeneratorsNeeded = roundUp(
+    requiredValues.yearlyElectricConsumption / generatorOutputYearly
+  );
+  const priceForGenerator =
+    numberOfGeneratorsNeeded * generatorPriceIncludingWarranty;
+  const estimatedCapitalCostBeforeMarkUp =
+    terrastoreCost +
+    priceForGenerator +
+    BundleCost +
+    gasCapPriceIncludingSkirt +
+    cfmCost +
+    gfsCost;
 
-      function roundUp(value) {
-        return Math.ceil(value);
-    }
-  const cfmCost = typeof gfsCost === 'number' && !isNaN(gfsCost) ? gfsCost * staticCFMCost : methaneAdjustedForGasEscape
-  const numberOfGasCapsNeeded = roundUp((lagoonSurfaceArea / gasCapSurfaceArea) * skirtPercentageLagoonSurfaceArea)
-  const gasCapPriceIncludingSkirt = numberOfGasCapsNeeded * costPerGasCap
-  const numberOfBundlesNeeded = fixedBundleNumber
-  const BundleCost = bundleCost * fixedBundleNumber
-  const totalAnnualBiogasCaptured = estimatedYearlyMethaneOutput / methaneOutputToBiogasOutputRatio
-  const peakMonthProduction = totalAnnualBiogasCaptured * peakMonthsBiomethaneProductionPercentage
-  const peakWeekProduction = peakMonthProduction / 4
-  const peakHourlyProduction = peakWeekProduction / (24 * 7)
-  const hoursOfMobileBiocyleNeededPerWeek = roundUp(peakWeekProduction / biocycleHourlyProcessingCapacity)
-  const nonBiocyleHours = 24 * 7 - hoursOfMobileBiocyleNeededPerWeek
-  const gasProducedWhenBiocyleNotPresent = peakHourlyProduction * nonBiocyleHours
-  const terrastoresNeededForAny =  roundUp(gasProducedWhenBiocyleNotPresent / terrastoreCapacity)
-  const actualNumberOfTerrastoresNeeded = cfmTypeNumberNeeded === 'Mobile'? terrastoresNeededForAny : 0
-  const terrastoresNeededNoBiocyle = (cfmTypeNumberNeeded === 'Mobile') ? roundUp(peakWeekProduction / terrastoreCapacity) : 0
-  const terrastoreCost = actualNumberOfTerrastoresNeeded * terrastorePriceIncludingWarranty + (actualNumberOfTerrastoresNeeded > 0 ? pressureSensorPriceIncludingWarranty : 0)
-  const numberOfGeneratorsNeeded = roundUp(requiredValues.yearlyElectricConsumption / generatorOutputYearly)
-  const priceForGenerator = numberOfGeneratorsNeeded * generatorPriceIncludingWarranty
-  const estimatedCapitalCostBeforeMarkUp = terrastoreCost + priceForGenerator + BundleCost + gasCapPriceIncludingSkirt + cfmCost + gfsCost
-
- 
- 
   //Income
-  const fromElectricExport = methaneRemainingAfterDiesel * kwhPerKgMethane * electricGridPrice
-  const fromRRTFCs = estimatedYearlyMethaneOutput * rtfcPrice * rtfcSplitPercentage
-  const totalIncome = fromRRTFCs + fromElectricExport
-
-  
-
+  const fromElectricExport =
+    methaneRemainingAfterDiesel * kwhPerKgMethane * electricGridPrice;
+  const fromRRTFCs =
+    estimatedYearlyMethaneOutput * rtfcPrice * rtfcSplitPercentage;
+  const totalIncome = fromRRTFCs + fromElectricExport;
 
   //Yearly Operations Costs
-  const fromCFM = typeof cfmTypeNumberNeeded === 'number'? cfmTypeNumberNeeded * yearlyCFMMaintenanceCost : yearlyMobileCFMMaintenanceCost
-  const fromGFS =  numberOfGFSNeeded * yearlyGFSMaintenanceCost
-  const fromGasCaps = numberOfGasCapsNeeded * yearlyOpsCostPerGasCap
-  const fromGenerator = numberOfGeneratorsNeeded * yearlyOpsPerGenerator
-  const fromTerrastores = terrastoresNeededForAny * yearlyOpsCostPerTerrastore
-  const gasProcessingCosts = annualGasProcessingCosts
-  const totalYearCosts = (fromCFM + fromGFS + fromGasCaps + fromGenerator + fromTerrastores + gasProcessingCosts ) * 0.5
+  const fromCFM =
+    typeof cfmTypeNumberNeeded === 'number'
+      ? cfmTypeNumberNeeded * yearlyCFMMaintenanceCost
+      : yearlyMobileCFMMaintenanceCost;
+  const fromGFS = numberOfGFSNeeded * yearlyGFSMaintenanceCost;
+  const fromGasCaps = numberOfGasCapsNeeded * yearlyOpsCostPerGasCap;
+  const fromGenerator = numberOfGeneratorsNeeded * yearlyOpsPerGenerator;
+  const fromTerrastores = terrastoresNeededForAny * yearlyOpsCostPerTerrastore;
+  const gasProcessingCosts = annualGasProcessingCosts;
+  const totalYearCosts =
+    (fromCFM +
+      fromGFS +
+      fromGasCaps +
+      fromGenerator +
+      fromTerrastores +
+      gasProcessingCosts) *
+    0.5;
 
+  //Capital Cost
+  const capitalCostWithMarkUp =
+    estimatedCapitalCostBeforeMarkUp * (1 + markUpPercentage);
 
+  //Net Revenue
+  const netRevenue1 = totalIncome + totalSavings - totalYearCosts;
+  const netRevenue = +netRevenue1.toFixed(5);
 
-   //Capital Cost
-   const capitalCostWithMarkUp  = estimatedCapitalCostBeforeMarkUp * (1 + markUpPercentage)
+  //ROI Time
+  const roiTime = capitalCostWithMarkUp / netRevenue;
 
-   //Net Revenue
-   const netRevenue1 = (totalIncome + totalSavings) - totalYearCosts
-   const netRevenue = +netRevenue1.toFixed(5)
-
-  //ROI Time 
-  const roiTime = capitalCostWithMarkUp / netRevenue
-
-  console.log(roiTime)
-
+  console.log(roiTime);
 
   //Net revenue = Add savings and income and subtract yearly operations cost
 
@@ -315,7 +345,11 @@ function App() {
             setRequiredValues={setRequiredValues}
           />
           <FormInput2 />
-          <Results />
+          <Results
+            capitalCost={capitalCostWithMarkUp}
+            netRevenue={netRevenue}
+            roiTime={roiTime}
+          />
         </StepWizard>
       </Container>
     </div>

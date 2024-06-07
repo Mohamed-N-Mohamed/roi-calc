@@ -1,12 +1,10 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import Checkbox from '@mui/material/Checkbox';
+import Button from '@mui/material/Button';
 
-const Results = () => {
+const Results = ({ capitalCost, netRevenue, roiTime, previousStep }) => {
   return (
     <Box
       sx={{
@@ -15,6 +13,9 @@ const Results = () => {
         height: '85vh',
         backgroundColor: '#e8edf0',
         borderRadius: '5px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
       }}
     >
       <Typography
@@ -32,65 +33,88 @@ const Results = () => {
         sx={{
           padding: '2rem',
           fontSize: '28px',
+          width: '100%',
+          maxWidth: '600px',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '1.5rem',
         }}
       >
         <Box
           sx={{
             display: 'flex',
-            flexDirection: 'column',
-            gap: '1.5rem',
-            paddingTop: '2rem',
-            alignSelf: 'center',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            width: '100%',
+            gap: '1rem',
           }}
         >
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              gap: '1rem',
-            }}
-          >
-            <Typography>Capital Cost</Typography>
-            <TextField
-              margin='normal'
-              value='£100,254,30'
-              sx={{ backgroundColor: '#fff', width: '30%' }}
-            />
-          </Box>
-
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              gap: '1rem',
-            }}
-          >
-            <Typography>Net Revenue</Typography>
-            <TextField
-              margin='normal'
-              value='£150,000/year'
-              sx={{ backgroundColor: '#fff', width: '30%' }}
-            />
-          </Box>
-
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              gap: '1rem',
-            }}
-          >
-            <Typography>ROI Time</Typography>
-            <TextField
-              margin='normal'
-              value='6 Years'
-              sx={{ backgroundColor: '#fff', width: '30%', marginLeft: '1rem' }}
-            />
-          </Box>
+          <Typography sx={{ width: '40%' }}>Capital Cost</Typography>
+          <TextField
+            margin='normal'
+            value={capitalCost}
+            sx={{ backgroundColor: '#fff', width: '60%' }}
+          />
         </Box>
+
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            width: '100%',
+            gap: '1rem',
+          }}
+        >
+          <Typography sx={{ width: '40%' }}>Net Revenue</Typography>
+          <TextField
+            margin='normal'
+            value={netRevenue}
+            sx={{ backgroundColor: '#fff', width: '60%' }}
+          />
+        </Box>
+
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            width: '100%',
+            gap: '1rem',
+          }}
+        >
+          <Typography sx={{ width: '40%' }}>ROI Time</Typography>
+          <TextField
+            margin='normal'
+            value={roiTime}
+            sx={{ backgroundColor: '#fff', width: '60%' }}
+          />
+        </Box>
+
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            width: '100%',
+            gap: '1rem',
+          }}
+        >
+          <Typography sx={{ width: '40%' }}>Sellable Gas</Typography>
+          <TextField
+            margin='normal'
+            value={roiTime}
+            sx={{ backgroundColor: '#fff', width: '60%' }}
+          />
+        </Box>
+        <Button
+          variant='contained'
+          sx={{ padding: '0.55rem 3rem', margin: '0 auto' }}
+          onClick={previousStep}
+        >
+          Previous
+        </Button>
       </Box>
     </Box>
   );
