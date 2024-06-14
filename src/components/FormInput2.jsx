@@ -1,55 +1,74 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import Checkbox from '@mui/material/Checkbox';
 
 const FormInput2 = (props) => {
-  const farmTypes = [
-    {
-      values: 'High',
-      label: 'High',
-    },
+  const inputRefs = {
+    electricConsumption: useRef(null),
+    dieselConsumption: useRef(null),
+    nitrogenFertilizer: useRef(null),
+  };
 
-    {
-      values: 'Medium',
-      label: 'Medium',
-    },
+  const [errors, setErrors] = useState({
+    electricConsumption: '',
+    dieselConsumption: '',
+    nitrogenFertilizer: '',
+  });
 
-    {
-      values: 'Low',
-      label: 'Low',
-    },
-  ];
+  const [values, setValues] = useState({
+    electricConsumption: '',
+    dieselConsumption: '',
+    nitrogenFertilizer: '',
+  });
 
-  const lagoonTypes = [
-    {
-      values: 'Earth Bunded',
-      label: 'Earth Bunded',
-    },
+  const handleChange = (e) => {
+    const { name, value } = e.target;
 
-    {
-      values: 'Earth Lined',
-      label: 'Earth Lined',
-    },
+    setValues((prevValues) => ({
+      ...prevValues,
+      [name]: value,
+    }));
 
-    {
-      values: 'Rectangular Concrete',
-      label: 'Rectangular Concrete',
-    },
+    validateInput(name, value);
+  };
 
-    {
-      values: 'Circular Concrete',
-      label: 'Circular Concrete',
-    },
+  const validateInput = (name, value) => {
+    let errorMsg = '';
 
-    {
-      values: 'Circular Steel',
-      label: 'Circular Steel',
-    },
-  ];
+    if (!value) {
+      errorMsg = 'This field cannot be empty.';
+    } else if (
+      name === 'electricConsumption' ||
+      name === 'dieselConsumption' ||
+      name === 'nitrogenFertilizer'
+    ) {
+      const pattern = /^-?\d*(\.\d+)?$/;
+      if (!pattern.test(value)) {
+        errorMsg = 'Please enter a valid number.';
+      }
+    }
+
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: errorMsg,
+    }));
+
+    return errorMsg === '';
+  };
+
+  const handleSubmit = () => {
+    const isValid = Object.keys(inputRefs).every((key) =>
+      validateInput(key, inputRefs[key].current.value)
+    );
+
+    if (isValid) {
+      console.log('Form submitted with values:', values);
+      props.nextStep();
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -75,6 +94,7 @@ const FormInput2 = (props) => {
         sx={{
           padding: '2rem',
           fontSize: '28px',
+          marginTop: '100px',
         }}
       >
         <Box
@@ -90,6 +110,11 @@ const FormInput2 = (props) => {
             margin='normal'
             required
             label='Yearly electric consumption'
+            name='electricConsumption'
+            onChange={handleChange}
+            inputRef={inputRefs.electricConsumption}
+            error={!!errors.electricConsumption}
+            value={values.electricConsumption}
             sx={{ backgroundColor: '#fff', width: '50%' }}
           />
 
@@ -97,6 +122,11 @@ const FormInput2 = (props) => {
             margin='normal'
             required
             label='Yearly diesel consumption'
+            name='dieselConsumption'
+            onChange={handleChange}
+            inputRef={inputRefs.dieselConsumption}
+            error={!!errors.dieselConsumption}
+            value={values.dieselConsumption}
             sx={{ backgroundColor: '#fff', width: '50%' }}
           />
         </Box>
@@ -112,6 +142,11 @@ const FormInput2 = (props) => {
             margin='normal'
             required
             label='No. of tonnes of nitrogen based fertiliser'
+            name='nitrogenFertilizer'
+            onChange={handleChange}
+            inputRef={inputRefs.nitrogenFertilizer}
+            error={!!errors.nitrogenFertilizer}
+            value={values.nitrogenFertilizer}
             sx={{ backgroundColor: '#fff', width: '50%' }}
           />
         </Box>
@@ -138,7 +173,7 @@ const FormInput2 = (props) => {
           <Button
             variant='contained'
             sx={{ padding: '0.55rem 1.8rem' }}
-            onClick={props.nextStep}
+            onClick={handleSubmit}
           >
             Calculate
           </Button>

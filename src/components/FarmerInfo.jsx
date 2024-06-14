@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Checkbox from '@mui/material/Checkbox';
 import AutoComplete from './AutoComplete';
+import Slider from '@mui/material/Slider';
 
 const farmTypes = [
   {
@@ -36,6 +37,32 @@ const FarmerInfo = ({ nextStep, setFarmerDetails, farmerDetails }) => {
       };
     });
   };
+
+  const [transitionPeriod, setTransitionPeriod] = useState([0, 11]);
+
+  const handleSliderChange = (event, newValue) => {
+    setTransitionPeriod(newValue);
+  };
+
+  const months = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
+  ];
+
+  const monthMarks = months.map((month, index) => ({
+    value: index,
+    label: month,
+  }));
 
   return (
     <Box
