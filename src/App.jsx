@@ -7,8 +7,15 @@ import FormInput2 from './components/FormInput2';
 import Results from './components/Results';
 import StepWizard from 'react-step-wizard';
 import { useState } from 'react';
+import LinearProgress from '@mui/material/LinearProgress';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import ProgressBar from './components/ProgressBar';
 
 function App() {
+  const [currentStep, setCurrentStep] = useState(1);
+
+  console.log(currentStep);
   const [capitalCost, setCapitalCost] = useState('');
 
   const [farmerDetails, setFarmerDetails] = useState({
@@ -331,11 +338,18 @@ function App() {
 
   //Net revenue = Add savings and income and subtract yearly operations cost
 
+  // set current step
+  const OnStepChange = (step) => {
+    setCurrentStep(step.activeStep);
+  };
+
+  //progress bar
   return (
     <div className='main'>
       <Container maxWidth='md'>
         <CssBaseline />
-        <StepWizard>
+
+        <StepWizard onStepChange={OnStepChange}>
           <FarmerInfo
             setFarmerDetails={setFarmerDetails}
             farmerDetails={farmerDetails}
@@ -351,6 +365,7 @@ function App() {
             roiTime={roiTime}
           />
         </StepWizard>
+        <ProgressBar currentStep={currentStep} totalSteps={4} />
       </Container>
     </div>
   );
