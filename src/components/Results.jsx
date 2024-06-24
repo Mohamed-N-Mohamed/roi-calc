@@ -53,7 +53,7 @@ const Results = ({ capitalCost, netRevenue, roiTime, previousStep }) => {
           <Typography sx={{ width: '40%' }}>Capital Cost</Typography>
           <TextField
             margin='normal'
-            value={capitalCost}
+            value={capitalCost.toFixed(2)}
             sx={{ backgroundColor: '#fff', width: '60%' }}
           />
         </Box>
@@ -70,7 +70,7 @@ const Results = ({ capitalCost, netRevenue, roiTime, previousStep }) => {
           <Typography sx={{ width: '40%' }}>Net Revenue</Typography>
           <TextField
             margin='normal'
-            value={netRevenue}
+            value={netRevenue.toFixed(2)}
             sx={{ backgroundColor: '#fff', width: '60%' }}
           />
         </Box>
@@ -87,7 +87,7 @@ const Results = ({ capitalCost, netRevenue, roiTime, previousStep }) => {
           <Typography sx={{ width: '40%' }}>ROI Time</Typography>
           <TextField
             margin='normal'
-            value={roiTime}
+            value={ `${Math.round(roiTime)} Years`}
             sx={{ backgroundColor: '#fff', width: '60%' }}
           />
         </Box>
@@ -104,7 +104,7 @@ const Results = ({ capitalCost, netRevenue, roiTime, previousStep }) => {
           <Typography sx={{ width: '40%' }}>Sellable Gas</Typography>
           <TextField
             margin='normal'
-            value={roiTime}
+            value='0'
             sx={{ backgroundColor: '#fff', width: '60%' }}
           />
         </Box>

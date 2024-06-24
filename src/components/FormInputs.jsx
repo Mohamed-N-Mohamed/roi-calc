@@ -156,7 +156,7 @@ const FormInputs = ({
             gap: '1rem',
             flexWrap: 'wrap',
           }}
-        >
+        > 
           <TextField
             margin='normal'
             required
@@ -226,7 +226,7 @@ const FormInputs = ({
           <TextField
             margin='normal'
             required
-            label='Lagoon Length'
+            label='Lagoon Length (m)'
             name='lagoonLength'
             onChange={handleChange}
             inputRef={inputRefs.lagoonLength}
@@ -237,7 +237,7 @@ const FormInputs = ({
           <TextField
             margin='normal'
             required
-            label='Lagoon Width'
+            label='Lagoon Width (m)'
             name='lagoonWidth'
             onChange={handleChange}
             inputRef={inputRefs.lagoonWidth}
@@ -248,7 +248,7 @@ const FormInputs = ({
           <TextField
             margin='normal'
             required
-            label='Lagoon Depth'
+            label='Lagoon Depth (m)'
             name='lagoonDepth'
             onChange={handleChange}
             inputRef={inputRefs.lagoonDepth}

@@ -109,7 +109,7 @@ const FormInput2 = (props) => {
           <TextField
             margin='normal'
             required
-            label='Yearly electric consumption'
+            label='Yearly electric consumption (kWh)'
             name='electricConsumption'
             onChange={handleChange}
             inputRef={inputRefs.electricConsumption}
@@ -121,7 +121,7 @@ const FormInput2 = (props) => {
           <TextField
             margin='normal'
             required
-            label='Yearly diesel consumption'
+            label='Yearly diesel consumption (l)'
             name='dieselConsumption'
             onChange={handleChange}
             inputRef={inputRefs.dieselConsumption}
@@ -141,7 +141,7 @@ const FormInput2 = (props) => {
           <TextField
             margin='normal'
             required
-            label='No. of tonnes of nitrogen based fertiliser'
+            label='No. of tonnes of nitrogen based fertiliser (tonnes)'
             name='nitrogenFertilizer'
             onChange={handleChange}
             inputRef={inputRefs.nitrogenFertilizer}

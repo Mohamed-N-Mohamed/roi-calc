@@ -336,10 +336,10 @@ function App() {
       <Container maxWidth='md'>
         <CssBaseline />
         <StepWizard>
-          {/* <FarmerInfo
+          <FarmerInfo
             setFarmerDetails={setFarmerDetails}
             farmerDetails={farmerDetails}
-          /> */}
+          />
           <FormInputs
             requiredValues={requiredValues}
             setRequiredValues={setRequiredValues}
