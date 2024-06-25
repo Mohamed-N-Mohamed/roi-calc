@@ -156,7 +156,7 @@ const FormInputs = ({
             gap: '1rem',
             flexWrap: 'wrap',
           }}
-        > 
+        >
           <TextField
             margin='normal'
             required
@@ -266,35 +266,7 @@ const FormInputs = ({
             maxWidth: '600px',
             margin: '2rem auto',
           }}
-        >
-          <TextField
-            margin='normal'
-            required
-            label='Months entirely in shed'
-            name='monthIn'
-            sx={{ backgroundColor: '#fff', width: '300px' }}
-          />
-
-          <TextField
-            margin='normal'
-            required
-            label='Transitionary months in shed'
-            name='Transitionary months'
-            sx={{ backgroundColor: '#fff', width: '300px' }}
-          />
-          {/* <Typography id='slider-label' gutterBottom>
-            Time Housed
-          </Typography>
-          <Slider
-            value={transitionPeriod}
-            onChange={handleSliderChange}
-            valueLabelDisplay='auto'
-            aria-labelledby='slider-label'
-            min={0}
-            max={11}
-            marks={monthMarks}
-          /> */}
-        </Box>
+        ></Box>
 
         <Box
           component='div'

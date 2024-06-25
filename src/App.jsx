@@ -11,6 +11,7 @@ import LinearProgress from '@mui/material/LinearProgress';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import ProgressBar from './components/ProgressBar';
+import FormInput3 from './components/FormInput3';
 
 function App() {
   const [currentStep, setCurrentStep] = useState(1);
@@ -358,14 +359,16 @@ function App() {
             requiredValues={requiredValues}
             setRequiredValues={setRequiredValues}
           />
+          <FormInput3 />
           <FormInput2 />
+
           <Results
             capitalCost={capitalCostWithMarkUp}
             netRevenue={netRevenue}
             roiTime={roiTime}
           />
         </StepWizard>
-        <ProgressBar currentStep={currentStep} totalSteps={4} />
+        <ProgressBar currentStep={currentStep} totalSteps={5} />
       </Container>
     </div>
   );

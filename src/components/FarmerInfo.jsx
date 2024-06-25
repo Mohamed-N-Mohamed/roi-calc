@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
@@ -183,8 +183,9 @@ const FarmerInfo = ({ nextStep, setFarmerDetails, farmerDetails }) => {
           }}
         >
           <Typography variant='body2' sx={{ width: '400px' }}>
-            I consent to the collection and processing of my personal data,
-            including my name, address, contact number, and email
+            By ticking this box you agree to Bennamann using your data in
+            accordance with our{' '}
+            <a href='https://bennamann.com/privacy-policy'>privacy policy</a>
           </Typography>
           <Checkbox />
         </Box>

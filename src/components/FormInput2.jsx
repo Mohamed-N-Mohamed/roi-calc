@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 const FormInput2 = (props) => {
+  console.log(props)
   const inputRefs = {
     electricConsumption: useRef(null),
     dieselConsumption: useRef(null),

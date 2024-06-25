@@ -5,6 +5,12 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
 const Results = ({ capitalCost, netRevenue, roiTime, previousStep }) => {
+  const years = Math.floor(roiTime);
+  const decimalPart = roiTime - years;
+  const months = Math.floor(decimalPart * 12);
+
+  //console.log(roiTime - years);
+
   return (
     <Box
       sx={{
@@ -87,7 +93,7 @@ const Results = ({ capitalCost, netRevenue, roiTime, previousStep }) => {
           <Typography sx={{ width: '40%' }}>ROI Time</Typography>
           <TextField
             margin='normal'
-            value={ `${Math.round(roiTime)} Years`}
+            value={`${years} Years and ${months} Months`}
             sx={{ backgroundColor: '#fff', width: '60%' }}
           />
         </Box>
@@ -115,6 +121,18 @@ const Results = ({ capitalCost, netRevenue, roiTime, previousStep }) => {
         >
           Previous
         </Button>
+      </Box>
+
+      <Box sx={{ width: '100%', maxWidth: 700, textAlign: 'center' }}>
+        <Typography
+          variant='body2'
+          sx={{ fontWeight: 700, fontSize: '13px', marginTop: '-1rem' }}
+        >
+          *All results presented here are estimates only and do not form part of
+          any contractual agreement. For a more complete report, please get in
+          touch with us to organise a site visit where we can conduct a detailed
+          assessment of your site and practices.
+        </Typography>
       </Box>
     </Box>
   );
