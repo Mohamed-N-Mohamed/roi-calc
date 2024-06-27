@@ -9,8 +9,6 @@ const Results = ({ capitalCost, netRevenue, roiTime, previousStep }) => {
   const decimalPart = roiTime - years;
   const months = Math.floor(decimalPart * 12);
 
-  //console.log(roiTime - years);
-
   return (
     <Box
       sx={{
@@ -91,11 +89,18 @@ const Results = ({ capitalCost, netRevenue, roiTime, previousStep }) => {
           }}
         >
           <Typography sx={{ width: '40%' }}>ROI Time</Typography>
-          <TextField
-            margin='normal'
-            value={`${years} Years and ${months} Months`}
-            sx={{ backgroundColor: '#fff', width: '60%' }}
-          />
+
+          {roiTime < 0 ? (
+            <Typography sx={{ maxWidth: '300px' }}>
+              Investing in this project has resulted in a financial loss
+            </Typography>
+          ) : (
+            <TextField
+              margin='normal'
+              value={`${years} Years and ${months} Months`}
+              sx={{ backgroundColor: '#fff', width: '60%' }}
+            />
+          )}
         </Box>
 
         <Box
