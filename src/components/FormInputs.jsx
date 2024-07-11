@@ -14,7 +14,7 @@ const FormInputs = ({
 }) => {
   const inputRefs = {
     herdSize: useRef(null),
-    lagoonVolume: useRef(null),
+    // lagoonVolume: useRef(null),
     lagoonLength: useRef(null),
     lagoonWidth: useRef(null),
     lagoonDepth: useRef(null),
@@ -184,7 +184,7 @@ const FormInputs = ({
               </MenuItem>
             ))}
           </TextField>
-          <TextField
+          {/* <TextField
             margin='normal'
             required
             label='Lagoon Volume'
@@ -194,7 +194,7 @@ const FormInputs = ({
             error={!!errors.lagoonVolume}
             value={requiredValues.lagoonVolume}
             sx={{ backgroundColor: '#fff', flex: '1 1 calc(33% - 1rem)' }}
-          />
+          /> */}
         </Box>
 
         <Box

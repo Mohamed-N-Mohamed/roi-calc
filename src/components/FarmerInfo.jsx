@@ -10,18 +10,18 @@ import Slider from '@mui/material/Slider';
 
 const farmTypes = [
   {
-    values: 'dairy farms',
-    label: 'dairy farms',
+    values: 'Farm 1',
+    label: 'Farm 1',
   },
 
   {
-    values: 'dairy farms 2',
-    label: 'dairy farms 2 ',
+    values: 'Farm 2',
+    label: 'Farm 2',
   },
 
   {
-    values: 'dairy farms 3',
-    label: 'dairy farms 3 ',
+    values: 'Farm 3',
+    label: 'Farm 3',
   },
 ];
 
