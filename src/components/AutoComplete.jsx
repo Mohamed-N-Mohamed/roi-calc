@@ -9,6 +9,7 @@ import Box from '@mui/material/Box';
 const AutoComplete = () => {
   const inputRef = useRef(null);
   const [country, setCountry] = useState('uk');
+  /* This is a test */
 
   const apiKey = import.meta.env.VITE_API_Key;
 
