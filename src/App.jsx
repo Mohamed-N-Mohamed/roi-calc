@@ -28,7 +28,7 @@ function App() {
 
   const [requiredValues, setRequiredValues] = useState({
     herdSize: 200,
-    yieldOfCows: 'Medium',
+    yieldOfCows: 'low',
     lagoonVolume: '',
     lagoonLength: 20,
     lagoonWidth: 70,
