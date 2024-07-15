@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import Checkbox from '@mui/material/Checkbox';
 import AutoComplete from './AutoComplete';
 import Slider from '@mui/material/Slider';
+import Header from './Header';
 
 const farmTypes = [
   {
@@ -69,19 +70,12 @@ const FarmerInfo = ({ nextStep, setFarmerDetails, farmerDetails }) => {
       sx={{
         marginTop: '20px',
         width: '100%',
-        height: '80vh',
-        backgroundColor: '#e8edf0',
+        height: '900px',
+        backgroundColor: '#f1f3f4',
         borderRadius: '5px',
       }}
     >
-      <Typography
-        component='h1'
-        variant='h5'
-        textAlign='center'
-        sx={{ paddingTop: '1rem' }}
-      >
-        Farmer Information
-      </Typography>
+      <Header />
 
       <Box
         component='form'
@@ -91,6 +85,14 @@ const FarmerInfo = ({ nextStep, setFarmerDetails, farmerDetails }) => {
           fontSize: '28px',
         }}
       >
+        <Typography
+          component='h1'
+          variant='h5'
+          textAlign='center'
+          sx={{ color: '#024724' }}
+        >
+          Farmer Information
+        </Typography>
         <Box
           component='div'
           sx={{
@@ -105,6 +107,7 @@ const FarmerInfo = ({ nextStep, setFarmerDetails, farmerDetails }) => {
             required
             label='Full Name'
             name='fullName'
+            color='success'
             sx={{ backgroundColor: '#fff', width: '50%' }}
             onChange={handleChange}
             value={farmerDetails.fullName}
@@ -123,6 +126,7 @@ const FarmerInfo = ({ nextStep, setFarmerDetails, farmerDetails }) => {
           label='Email'
           fullWidth
           name='email'
+          color='success'
           onChange={handleChange}
           value={farmerDetails.email}
           sx={{ backgroundColor: '#fff' }}
@@ -143,6 +147,7 @@ const FarmerInfo = ({ nextStep, setFarmerDetails, farmerDetails }) => {
             label='Farm Type'
             select
             name='farmType'
+            color='success'
             onChange={handleChange}
             value={farmerDetails.farmType}
             sx={{ width: '50%', backgroundColor: '#fff' }}
@@ -159,6 +164,7 @@ const FarmerInfo = ({ nextStep, setFarmerDetails, farmerDetails }) => {
             label='Phone'
             name='phone'
             onChange={handleChange}
+            color='success'
             value={farmerDetails.phone}
             fullWidth
             sx={{ backgroundColor: '#fff', width: '50%' }}
@@ -182,12 +188,12 @@ const FarmerInfo = ({ nextStep, setFarmerDetails, farmerDetails }) => {
             paddingTop: '2rem',
           }}
         >
-          <Typography variant='body2' sx={{ width: '400px' }}>
+          <Typography variant='body2' sx={{ width: '400px', color: '#024724' }}>
             By ticking this box you agree to Bennamann using your data in
             accordance with our{' '}
             <a href='https://bennamann.com/privacy-policy'>privacy policy</a>
           </Typography>
-          <Checkbox />
+          <Checkbox color='success' />
         </Box>
 
         <Box
@@ -197,7 +203,8 @@ const FarmerInfo = ({ nextStep, setFarmerDetails, farmerDetails }) => {
         >
           <Button
             variant='contained'
-            sx={{ padding: '0.55rem 1.8rem' }}
+            color='success'
+            sx={{ padding: '0.55rem 1.8rem', backgroundColor: '#6c9d4e' }}
             onClick={nextStep}
           >
             Continue

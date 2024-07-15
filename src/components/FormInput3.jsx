@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import Header from './Header';
 
 const FormInput3 = ({ nextStep, previousStep }) => {
   return (
@@ -10,19 +11,12 @@ const FormInput3 = ({ nextStep, previousStep }) => {
       sx={{
         marginTop: '20px',
         width: '100%',
-        height: '85vh',
-        backgroundColor: '#e8edf0',
+        backgroundColor: '#f1f3f4',
+        height: '900px',
         borderRadius: '5px',
       }}
     >
-      <Typography
-        component='h1'
-        variant='h5'
-        textAlign='center'
-        sx={{ paddingTop: '1rem' }}
-      >
-        ROI Calculator
-      </Typography>
+      <Header />
 
       <Box
         component='form'
@@ -30,9 +24,17 @@ const FormInput3 = ({ nextStep, previousStep }) => {
         sx={{
           padding: '2rem',
           fontSize: '28px',
-          marginTop: '100px',
+          marginTop: '50px',
         }}
       >
+        <Typography
+          component='h1'
+          variant='h5'
+          textAlign='center'
+          sx={{ color: '#024724' }}
+        >
+          ROI Calculator
+        </Typography>
         <Box
           component='div'
           sx={{
@@ -108,7 +110,8 @@ const FormInput3 = ({ nextStep, previousStep }) => {
         >
           <Button
             variant='contained'
-            sx={{ padding: '0.55rem 1.8rem' }}
+            color='success'
+            sx={{ padding: '0.55rem 1.8rem', backgroundColor: '#6c9d4e' }}
             onClick={previousStep}
           >
             Previous
@@ -116,7 +119,8 @@ const FormInput3 = ({ nextStep, previousStep }) => {
 
           <Button
             variant='contained'
-            sx={{ padding: '0.55rem 1.8rem' }}
+            color='success'
+            sx={{ padding: '0.55rem 1.8rem', backgroundColor: '#6c9d4e' }}
             onClick={nextStep}
           >
             Continue

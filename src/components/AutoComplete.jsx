@@ -9,7 +9,6 @@ import Box from '@mui/material/Box';
 const AutoComplete = () => {
   const inputRef = useRef(null);
   const [country, setCountry] = useState('uk');
-  /* This is a test */
 
   const apiKey = import.meta.env.VITE_API_Key;
 
@@ -23,10 +22,11 @@ const AutoComplete = () => {
   });
   return (
     <TextField
-      label='address'
+      label='Address'
       inputRef={materialRef}
       margin='normal'
       required
+      color='success'
       name='address'
       sx={{ backgroundColor: '#fff', width: '50%' }}
     />

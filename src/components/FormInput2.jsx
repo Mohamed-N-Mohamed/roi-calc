@@ -3,9 +3,10 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import Header from './Header';
 
 const FormInput2 = (props) => {
-  console.log(props)
+  console.log(props);
   const inputRefs = {
     electricConsumption: useRef(null),
     dieselConsumption: useRef(null),
@@ -75,19 +76,12 @@ const FormInput2 = (props) => {
       sx={{
         marginTop: '20px',
         width: '100%',
-        height: '85vh',
-        backgroundColor: '#e8edf0',
+        backgroundColor: '#f1f3f4',
+        height: '900px',
         borderRadius: '5px',
       }}
     >
-      <Typography
-        component='h1'
-        variant='h5'
-        textAlign='center'
-        sx={{ paddingTop: '1rem' }}
-      >
-        ROI Calculator
-      </Typography>
+      <Header />
 
       <Box
         component='form'
@@ -95,9 +89,17 @@ const FormInput2 = (props) => {
         sx={{
           padding: '2rem',
           fontSize: '28px',
-          marginTop: '100px',
+          marginTop: '50px',
         }}
       >
+        <Typography
+          component='h1'
+          variant='h5'
+          textAlign='center'
+          sx={{ color: '#024724', marginBottom: '1rem' }}
+        >
+          ROI Calculator
+        </Typography>
         <Box
           component='div'
           sx={{
@@ -112,6 +114,7 @@ const FormInput2 = (props) => {
             required
             label='Yearly electric consumption (kWh)'
             name='electricConsumption'
+            color='success'
             onChange={handleChange}
             inputRef={inputRefs.electricConsumption}
             error={!!errors.electricConsumption}
@@ -124,6 +127,7 @@ const FormInput2 = (props) => {
             required
             label='Yearly diesel consumption (l)'
             name='dieselConsumption'
+            color='success'
             onChange={handleChange}
             inputRef={inputRefs.dieselConsumption}
             error={!!errors.dieselConsumption}
@@ -144,6 +148,7 @@ const FormInput2 = (props) => {
             required
             label='No. of tonnes of nitrogen based fertiliser (tonnes)'
             name='nitrogenFertilizer'
+            color='success'
             onChange={handleChange}
             inputRef={inputRefs.nitrogenFertilizer}
             error={!!errors.nitrogenFertilizer}
@@ -165,7 +170,8 @@ const FormInput2 = (props) => {
         >
           <Button
             variant='contained'
-            sx={{ padding: '0.55rem 1.8rem' }}
+            color='success'
+            sx={{ padding: '0.55rem 1.8rem', backgroundColor: '#6c9d4e' }}
             onClick={props.previousStep}
           >
             Previous
@@ -173,7 +179,8 @@ const FormInput2 = (props) => {
 
           <Button
             variant='contained'
-            sx={{ padding: '0.55rem 1.8rem' }}
+            color='success'
+            sx={{ padding: '0.55rem 1.8rem', backgroundColor: '#6c9d4e' }}
             onClick={handleSubmit}
           >
             Calculate

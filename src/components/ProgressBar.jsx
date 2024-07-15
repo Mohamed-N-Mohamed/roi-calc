@@ -10,7 +10,7 @@ const ProgressBar = ({ currentStep, totalSteps }) => {
       <Typography variant='body2' color='textSecondary'>{`${Math.round(
         percentage
       )}%`}</Typography>
-      <LinearProgress variant='determinate' value={percentage} />
+      <LinearProgress variant='determinate' value={percentage} color="success"/>
     </Box>
   );
 };

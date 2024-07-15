@@ -5,6 +5,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Slider from '@mui/material/Slider';
+import Header from './Header';
 
 const FormInputs = ({
   previousStep,
@@ -121,22 +122,15 @@ const FormInputs = ({
       sx={{
         marginTop: '20px',
         width: '100%',
-        height: '85vh',
-        backgroundColor: '#e8edf0',
+        backgroundColor: '#f1f3f4',
+        height: '900px',
         borderRadius: '5px',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
       }}
     >
-      <Typography
-        component='h1'
-        variant='h5'
-        textAlign='center'
-        sx={{ paddingTop: '1rem' }}
-      >
-        ROI Calculator
-      </Typography>
+      <Header />
 
       <Box
         component='form'
@@ -148,6 +142,14 @@ const FormInputs = ({
           maxWidth: '900px',
         }}
       >
+        <Typography
+          component='h1'
+          variant='h5'
+          textAlign='center'
+          sx={{ color: '#024724', marginBottom: '1rem' }}
+        >
+          ROI Calculator
+        </Typography>
         <Box
           component='div'
           sx={{
@@ -162,6 +164,7 @@ const FormInputs = ({
             required
             label='Herd Size'
             name='herdSize'
+            color='success'
             onChange={handleChange}
             inputRef={inputRefs.herdSize}
             error={!!errors.herdSize}
@@ -173,6 +176,7 @@ const FormInputs = ({
             required
             label='Yield of cows'
             select
+            color='success'
             onChange={handleChange}
             name='yieldOfCows'
             value={requiredValues.yieldOfCows}
@@ -212,6 +216,7 @@ const FormInputs = ({
             required
             label='Lagoon Type'
             select
+            color='success'
             onChange={handleChange}
             name='lagoonType'
             value={requiredValues.lagoonType}
@@ -229,6 +234,7 @@ const FormInputs = ({
             label='Lagoon Length (m)'
             name='lagoonLength'
             onChange={handleChange}
+            color='success'
             inputRef={inputRefs.lagoonLength}
             error={!!errors.lagoonLength}
             value={requiredValues.lagoonLength}
@@ -239,6 +245,7 @@ const FormInputs = ({
             required
             label='Lagoon Width (m)'
             name='lagoonWidth'
+            color='success'
             onChange={handleChange}
             inputRef={inputRefs.lagoonWidth}
             error={!!errors.lagoonWidth}
@@ -250,6 +257,7 @@ const FormInputs = ({
             required
             label='Lagoon Depth (m)'
             name='lagoonDepth'
+            color='success'
             onChange={handleChange}
             inputRef={inputRefs.lagoonDepth}
             error={!!errors.lagoonDepth}
@@ -281,14 +289,16 @@ const FormInputs = ({
         >
           <Button
             variant='contained'
-            sx={{ padding: '0.55rem 1.8rem' }}
+            color='success'
+            sx={{ padding: '0.55rem 1.8rem', backgroundColor: '#6c9d4e' }}
             onClick={previousStep}
           >
             Previous
           </Button>
           <Button
             variant='contained'
-            sx={{ padding: '0.55rem 1.8rem' }}
+            color='success'
+            sx={{ padding: '0.55rem 1.8rem', backgroundColor: '#6c9d4e' }}
             onClick={handleSubmit}
           >
             Continue
