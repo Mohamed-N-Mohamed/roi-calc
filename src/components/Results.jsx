@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import Header from './Header';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
+import ProgressBar from '../components/ProgressBar';
 
 const Results = ({
   capitalCost,
@@ -15,6 +16,8 @@ const Results = ({
   saleableMethane,
   setPageState,
   pageState,
+  currentStep,
+  totalSteps,
 }) => {
   const years = Math.floor(roiTime);
   const decimalPart = roiTime - years;
@@ -192,6 +195,10 @@ const Results = ({
           touch with us to organise a site visit where we can conduct a detailed
           assessment of your site and practices.
         </Typography>
+      </Box>
+
+      <Box sx={{ width: '100%', padding: '2rem', marginTop: '-3rem' }}>
+        <ProgressBar currentStep={currentStep} totalSteps={totalSteps} />
       </Box>
     </Box>
   );

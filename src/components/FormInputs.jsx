@@ -6,12 +6,16 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Slider from '@mui/material/Slider';
 import Header from './Header';
+import ProgressBar from '../components/ProgressBar';
 
 const FormInputs = ({
   previousStep,
   nextStep,
   requiredValues,
   setRequiredValues,
+  currentStep,
+  totalSteps
+  
 }) => {
   const inputRefs = {
     herdSize: useRef(null),
@@ -123,7 +127,7 @@ const FormInputs = ({
         marginTop: '20px',
         width: '100%',
         backgroundColor: '#f1f3f4',
-        height: '900px',
+        height: '800px',
         borderRadius: '5px',
         display: 'flex',
         flexDirection: 'column',
@@ -272,7 +276,7 @@ const FormInputs = ({
             justifyContent: 'center',
             gap: '1rem',
             maxWidth: '600px',
-            margin: '2rem auto',
+            margin: '1rem auto',
           }}
         ></Box>
 
@@ -280,7 +284,6 @@ const FormInputs = ({
           component='div'
           className='form-submit'
           sx={{
-            paddingTop: '2rem',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
@@ -304,6 +307,7 @@ const FormInputs = ({
             Continue
           </Button>
         </Box>
+        <ProgressBar currentStep={currentStep} totalSteps={totalSteps} />
       </Box>
     </Box>
   );

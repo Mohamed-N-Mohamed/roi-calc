@@ -4,15 +4,15 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Header from './Header';
-
-const FormInput3 = ({ nextStep, previousStep }) => {
+import ProgressBar from '../components/ProgressBar';
+const FormInput3 = ({ nextStep, previousStep, currentStep,totalSteps }) => {
   return (
     <Box
       sx={{
         marginTop: '20px',
         width: '100%',
         backgroundColor: '#f1f3f4',
-        height: '900px',
+        height: '800px',
         borderRadius: '5px',
       }}
     >
@@ -126,6 +126,8 @@ const FormInput3 = ({ nextStep, previousStep }) => {
             Continue
           </Button>
         </Box>
+
+        <ProgressBar currentStep={currentStep} totalSteps={totalSteps} />
       </Box>
     </Box>
   );

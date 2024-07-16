@@ -27,20 +27,22 @@ function App() {
   });
 
   const [requiredValues, setRequiredValues] = useState({
-    herdSize: 200,
-    yieldOfCows: 'low',
+    herdSize: '',
+    yieldOfCows: '',
     lagoonVolume: '',
-    lagoonLength: 20,
-    lagoonWidth: 70,
-    lagoonDepth: 3,
-    lagoonType: 'Rectangular Concrete',
+    lagoonLength: '',
+    lagoonWidth: '',
+    lagoonDepth: '',
+    lagoonType: '',
     timeHoused: 4,
     bundAngle: 30,
-    yearlyElectricConsumption: 96000,
-    yearlyDieselConsumption: 1200,
+    yearlyElectricConsumption: '',
+    yearlyDieselConsumption: '',
     tractorHoursPerYear: 0,
-    numberOfTonnesNitrogenBasedFertiliser: 500,
+    numberOfTonnesNitrogenBasedFertiliser: '',
   });
+
+  console.log(requiredValues);
 
   const [pageState, setPageState] = useState(0);
 
@@ -489,13 +491,27 @@ function App() {
           <FarmerInfo
             setFarmerDetails={setFarmerDetails}
             farmerDetails={farmerDetails}
+            currentStep={currentStep}
+            totalSteps={5}
           />
           <FormInputs
             requiredValues={requiredValues}
             setRequiredValues={setRequiredValues}
+            currentStep={currentStep}
+            totalSteps={5}
           />
-          <FormInput3 />
-          <FormInput2 />
+          <FormInput3
+            requiredValues={requiredValues}
+            setRequiredValues={setRequiredValues}
+            currentStep={currentStep}
+            totalSteps={5}
+          />
+          <FormInput2
+            requiredValues={requiredValues}
+            setRequiredValues={setRequiredValues}
+            currentStep={currentStep}
+            totalSteps={5}
+          />
 
           {pageState === 0 ? (
             <Results
@@ -516,7 +532,6 @@ function App() {
             />
           )}
         </StepWizard>
-        <ProgressBar currentStep={currentStep} totalSteps={5} />
 
         {/* <Results
           capitalCost={capitalCostCAPCH4}

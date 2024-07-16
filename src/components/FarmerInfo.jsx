@@ -8,6 +8,7 @@ import Checkbox from '@mui/material/Checkbox';
 import AutoComplete from './AutoComplete';
 import Slider from '@mui/material/Slider';
 import Header from './Header';
+import ProgressBar from '../components/ProgressBar';
 
 const farmTypes = [
   {
@@ -26,7 +27,13 @@ const farmTypes = [
   },
 ];
 
-const FarmerInfo = ({ nextStep, setFarmerDetails, farmerDetails }) => {
+const FarmerInfo = ({
+  nextStep,
+  setFarmerDetails,
+  farmerDetails,
+  currentStep,
+  totalSteps,
+}) => {
   const handleChange = (e) => {
     console.log(e.target.name);
 
@@ -70,7 +77,7 @@ const FarmerInfo = ({ nextStep, setFarmerDetails, farmerDetails }) => {
       sx={{
         marginTop: '20px',
         width: '100%',
-        height: '900px',
+        height: '800px',
         backgroundColor: '#f1f3f4',
         borderRadius: '5px',
       }}
@@ -210,6 +217,7 @@ const FarmerInfo = ({ nextStep, setFarmerDetails, farmerDetails }) => {
             Continue
           </Button>
         </Box>
+        <ProgressBar currentStep={currentStep} totalSteps={totalSteps} />
       </Box>
     </Box>
   );

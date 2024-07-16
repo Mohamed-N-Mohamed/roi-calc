@@ -4,15 +4,24 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Header from './Header';
+import ProgressBar from '../components/ProgressBar';
 
-const FormInput2 = (props) => {
-  console.log(props);
+const FormInput2 = ({
+  nextStep,
+  previousStep,
+  currentStep,
+  totalSteps,
+  requiredValues,
+  setRequiredValues,
+}) => {
   const inputRefs = {
     electricConsumption: useRef(null),
     dieselConsumption: useRef(null),
     nitrogenFertilizer: useRef(null),
   };
 
+
+  console.log('hello world')
   const [errors, setErrors] = useState({
     electricConsumption: '',
     dieselConsumption: '',
@@ -28,11 +37,10 @@ const FormInput2 = (props) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    setValues((prevValues) => ({
-      ...prevValues,
+    setRequiredValues((prev) => ({
+      ...prev,
       [name]: value,
     }));
-
     validateInput(name, value);
   };
 
@@ -64,10 +72,11 @@ const FormInput2 = (props) => {
     const isValid = Object.keys(inputRefs).every((key) =>
       validateInput(key, inputRefs[key].current.value)
     );
+    
 
     if (isValid) {
-      console.log('Form submitted with values:', values);
-      props.nextStep();
+      console.log('Form submitted with values:', requiredValues);
+      nextStep();
     }
   };
 
@@ -77,7 +86,7 @@ const FormInput2 = (props) => {
         marginTop: '20px',
         width: '100%',
         backgroundColor: '#f1f3f4',
-        height: '900px',
+        height: '800px',
         borderRadius: '5px',
       }}
     >
@@ -113,12 +122,12 @@ const FormInput2 = (props) => {
             margin='normal'
             required
             label='Yearly electric consumption (kWh)'
-            name='electricConsumption'
+            name='yearlyElectricConsumption'
             color='success'
             onChange={handleChange}
             inputRef={inputRefs.electricConsumption}
             error={!!errors.electricConsumption}
-            value={values.electricConsumption}
+            value={requiredValues.yearlyElectricConsumption}
             sx={{ backgroundColor: '#fff', width: '50%' }}
           />
 
@@ -126,12 +135,12 @@ const FormInput2 = (props) => {
             margin='normal'
             required
             label='Yearly diesel consumption (l)'
-            name='dieselConsumption'
+            name='yearlyDieselConsumption'
             color='success'
             onChange={handleChange}
             inputRef={inputRefs.dieselConsumption}
             error={!!errors.dieselConsumption}
-            value={values.dieselConsumption}
+            value={requiredValues.yearlyDieselConsumption}
             sx={{ backgroundColor: '#fff', width: '50%' }}
           />
         </Box>
@@ -147,12 +156,12 @@ const FormInput2 = (props) => {
             margin='normal'
             required
             label='No. of tonnes of nitrogen based fertiliser (tonnes)'
-            name='nitrogenFertilizer'
+            name='numberOfTonnesNitrogenBasedFertiliser'
             color='success'
             onChange={handleChange}
             inputRef={inputRefs.nitrogenFertilizer}
             error={!!errors.nitrogenFertilizer}
-            value={values.nitrogenFertilizer}
+            value={requiredValues.numberOfTonnesNitrogenBasedFertiliser}
             sx={{ backgroundColor: '#fff', width: '50%' }}
           />
         </Box>
@@ -172,7 +181,7 @@ const FormInput2 = (props) => {
             variant='contained'
             color='success'
             sx={{ padding: '0.55rem 1.8rem', backgroundColor: '#6c9d4e' }}
-            onClick={props.previousStep}
+            onClick={previousStep}
           >
             Previous
           </Button>
@@ -186,6 +195,7 @@ const FormInput2 = (props) => {
             Calculate
           </Button>
         </Box>
+        <ProgressBar currentStep={currentStep} totalSteps={totalSteps} />
       </Box>
     </Box>
   );
