@@ -532,12 +532,6 @@ function App() {
             />
           )}
         </StepWizard>
-
-        {/* <Results
-          capitalCost={capitalCostCAPCH4}
-          netRevenue={netRevenueCAPCH4}
-          roiTime={roiTimeCAPCH4}
-        /> */}
       </Container>
     </div>
   );

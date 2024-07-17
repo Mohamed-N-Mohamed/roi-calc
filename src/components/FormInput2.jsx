@@ -5,6 +5,9 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Header from './Header';
 import ProgressBar from '../components/ProgressBar';
+import InfoIcon from '@mui/icons-material/Info';
+import Tooltip from '@mui/material/Tooltip';
+import IconButton from '@mui/material/IconButton';
 
 const FormInput2 = ({
   nextStep,
@@ -20,8 +23,6 @@ const FormInput2 = ({
     nitrogenFertilizer: useRef(null),
   };
 
-
-  console.log('hello world')
   const [errors, setErrors] = useState({
     electricConsumption: '',
     dieselConsumption: '',
@@ -72,7 +73,6 @@ const FormInput2 = ({
     const isValid = Object.keys(inputRefs).every((key) =>
       validateInput(key, inputRefs[key].current.value)
     );
-    
 
     if (isValid) {
       console.log('Form submitted with values:', requiredValues);
@@ -118,31 +118,55 @@ const FormInput2 = ({
             alignItems: 'center',
           }}
         >
-          <TextField
-            margin='normal'
-            required
-            label='Yearly electric consumption (kWh)'
-            name='yearlyElectricConsumption'
-            color='success'
-            onChange={handleChange}
-            inputRef={inputRefs.electricConsumption}
-            error={!!errors.electricConsumption}
-            value={requiredValues.yearlyElectricConsumption}
-            sx={{ backgroundColor: '#fff', width: '50%' }}
-          />
+          <Tooltip
+            title='Enter yearly consumption in kilowatt-hour'
+            placement='top'
+          >
+            <TextField
+              margin='normal'
+              required
+              label='Yearly electric consumption (kWh)'
+              name='yearlyElectricConsumption'
+              color='success'
+              onChange={handleChange}
+              inputRef={inputRefs.electricConsumption}
+              error={!!errors.electricConsumption}
+              value={requiredValues.yearlyElectricConsumption}
+              InputProps={{
+                endAdornment: (
+                  <IconButton aria-label='info'>
+                    <InfoIcon />
+                  </IconButton>
+                ),
+              }}
+              sx={{ backgroundColor: '#fff', width: '50%' }}
+            />
+          </Tooltip>
 
-          <TextField
-            margin='normal'
-            required
-            label='Yearly diesel consumption (l)'
-            name='yearlyDieselConsumption'
-            color='success'
-            onChange={handleChange}
-            inputRef={inputRefs.dieselConsumption}
-            error={!!errors.dieselConsumption}
-            value={requiredValues.yearlyDieselConsumption}
-            sx={{ backgroundColor: '#fff', width: '50%' }}
-          />
+          <Tooltip
+            title='Enter yearly diesel consumption in litre'
+            placement='top'
+          >
+            <TextField
+              margin='normal'
+              required
+              label='Yearly diesel consumption (l)'
+              name='yearlyDieselConsumption'
+              color='success'
+              onChange={handleChange}
+              inputRef={inputRefs.dieselConsumption}
+              error={!!errors.dieselConsumption}
+              value={requiredValues.yearlyDieselConsumption}
+              InputProps={{
+                endAdornment: (
+                  <IconButton aria-label='info'>
+                    <InfoIcon />
+                  </IconButton>
+                ),
+              }}
+              sx={{ backgroundColor: '#fff', width: '50%' }}
+            />
+          </Tooltip>
         </Box>
 
         <Box
@@ -152,18 +176,27 @@ const FormInput2 = ({
             marginBottom: '2rem',
           }}
         >
-          <TextField
-            margin='normal'
-            required
-            label='No. of tonnes of nitrogen based fertiliser (tonnes)'
-            name='numberOfTonnesNitrogenBasedFertiliser'
-            color='success'
-            onChange={handleChange}
-            inputRef={inputRefs.nitrogenFertilizer}
-            error={!!errors.nitrogenFertilizer}
-            value={requiredValues.numberOfTonnesNitrogenBasedFertiliser}
-            sx={{ backgroundColor: '#fff', width: '50%' }}
-          />
+          <Tooltip title='Enter number of nitrogen based fertiliser in tonnes'>
+            <TextField
+              margin='normal'
+              required
+              label='Nitrogen based fertiliser (tonnes)'
+              name='numberOfTonnesNitrogenBasedFertiliser'
+              color='success'
+              onChange={handleChange}
+              inputRef={inputRefs.nitrogenFertilizer}
+              error={!!errors.nitrogenFertilizer}
+              value={requiredValues.numberOfTonnesNitrogenBasedFertiliser}
+              InputProps={{
+                endAdornment: (
+                  <IconButton aria-label='info'>
+                    <InfoIcon />
+                  </IconButton>
+                ),
+              }}
+              sx={{ backgroundColor: '#fff', width: '50%' }}
+            />
+          </Tooltip>
         </Box>
 
         <Box

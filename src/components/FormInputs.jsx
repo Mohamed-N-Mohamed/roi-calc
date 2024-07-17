@@ -7,6 +7,9 @@ import Typography from '@mui/material/Typography';
 import Slider from '@mui/material/Slider';
 import Header from './Header';
 import ProgressBar from '../components/ProgressBar';
+import InfoIcon from '@mui/icons-material/Info';
+import Tooltip from '@mui/material/Tooltip';
+import IconButton from '@mui/material/IconButton';
 
 const FormInputs = ({
   previousStep,
@@ -14,8 +17,7 @@ const FormInputs = ({
   requiredValues,
   setRequiredValues,
   currentStep,
-  totalSteps
-  
+  totalSteps,
 }) => {
   const inputRefs = {
     herdSize: useRef(null),
@@ -163,18 +165,27 @@ const FormInputs = ({
             flexWrap: 'wrap',
           }}
         >
-          <TextField
-            margin='normal'
-            required
-            label='Herd Size'
-            name='herdSize'
-            color='success'
-            onChange={handleChange}
-            inputRef={inputRefs.herdSize}
-            error={!!errors.herdSize}
-            value={requiredValues.herdSize}
-            sx={{ backgroundColor: '#fff', flex: '1 1 calc(33% - 1rem)' }}
-          />
+          <Tooltip title='Enter the number of herd size' placement='top'>
+            <TextField
+              margin='normal'
+              required
+              label='Herd Size'
+              name='herdSize'
+              color='success'
+              onChange={handleChange}
+              inputRef={inputRefs.herdSize}
+              error={!!errors.herdSize}
+              value={requiredValues.herdSize}
+              InputProps={{
+                endAdornment: (
+                  <IconButton aria-label='info'>
+                    <InfoIcon />
+                  </IconButton>
+                ),
+              }}
+              sx={{ backgroundColor: '#fff', flex: '1 1 calc(33% - 1rem)' }}
+            />
+          </Tooltip>
           <TextField
             margin='normal'
             required
@@ -232,42 +243,72 @@ const FormInputs = ({
               </MenuItem>
             ))}
           </TextField>
-          <TextField
-            margin='normal'
-            required
-            label='Lagoon Length (m)'
-            name='lagoonLength'
-            onChange={handleChange}
-            color='success'
-            inputRef={inputRefs.lagoonLength}
-            error={!!errors.lagoonLength}
-            value={requiredValues.lagoonLength}
-            sx={{ backgroundColor: '#fff', flex: '1 1 calc(33% - 1rem)' }}
-          />
-          <TextField
-            margin='normal'
-            required
-            label='Lagoon Width (m)'
-            name='lagoonWidth'
-            color='success'
-            onChange={handleChange}
-            inputRef={inputRefs.lagoonWidth}
-            error={!!errors.lagoonWidth}
-            value={requiredValues.lagoonWidth}
-            sx={{ backgroundColor: '#fff', flex: '1 1 calc(33% - 1rem)' }}
-          />
-          <TextField
-            margin='normal'
-            required
-            label='Lagoon Depth (m)'
-            name='lagoonDepth'
-            color='success'
-            onChange={handleChange}
-            inputRef={inputRefs.lagoonDepth}
-            error={!!errors.lagoonDepth}
-            value={requiredValues.lagoonDepth}
-            sx={{ backgroundColor: '#fff', flex: '1 1 calc(33% - 1rem)' }}
-          />
+          <Tooltip title='Enter the farm lagoon length' placement='top'>
+            <TextField
+              margin='normal'
+              required
+              label='Lagoon Length (m)'
+              name='lagoonLength'
+              onChange={handleChange}
+              color='success'
+              inputRef={inputRefs.lagoonLength}
+              error={!!errors.lagoonLength}
+              value={requiredValues.lagoonLength}
+              InputProps={{
+                endAdornment: (
+                  <IconButton aria-label='info'>
+                    <InfoIcon />
+                  </IconButton>
+                ),
+              }}
+              sx={{ backgroundColor: '#fff' }}
+            />
+          </Tooltip>
+          <Tooltip title='Enter the lagoon width in metre' placement='top'>
+            <TextField
+              margin='normal'
+              required
+              label='Lagoon Width (m)'
+              name='lagoonWidth'
+              color='success'
+              onChange={handleChange}
+              inputRef={inputRefs.lagoonWidth}
+              error={!!errors.lagoonWidth}
+              value={requiredValues.lagoonWidth}
+              InputProps={{
+                endAdornment: (
+                  <IconButton aria-label='info'>
+                    <InfoIcon />
+                  </IconButton>
+                ),
+              }}
+              sx={{ backgroundColor: '#fff', flex: '1 1 calc(33% - 1rem)' }}
+            />
+          </Tooltip>
+          <Tooltip
+            title='Enter the lagoon depth in metre'
+            placement='right-start'
+          >
+            <TextField
+              margin='normal'
+              required
+              label='Lagoon Depth (m)'
+              name='lagoonDepth'
+              color='success'
+              onChange={handleChange}
+              inputRef={inputRefs.lagoonDepth}
+              error={!!errors.lagoonDepth}
+              value={requiredValues.lagoonDepth}
+              InputProps={{
+                endAdornment: (
+                  <IconButton aria-label='info'>
+                    <InfoIcon />
+                  </IconButton>
+                ),
+              }}
+              sx={{ backgroundColor: '#fff', flex: '1 1 calc(33% - 1rem)' }}
+            />
+          </Tooltip>
         </Box>
 
         <Box
